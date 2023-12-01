@@ -24,10 +24,26 @@ function Read() {
     }, []
   );
 
+  // Read.js only place we can do full refresh of page
+  const ReloadData = (e)=>{
+    axios.get('http://localhost:4000/api/books')
+    .then(
+        (response)=>{
+            setData(response.data)
+        }
+    )
+    .catch(
+        (error)=>{
+            console.log(error);
+        }
+    )
+  }
+
     return (
         <div>
             <h2>Hello from Read Component!</h2>
-            <Books myBooks={data}></Books>
+            {/* Reload Page Added */}
+            <Books myBooks={data} Reload={ReloadData}></Books>
         </div>
     );
 

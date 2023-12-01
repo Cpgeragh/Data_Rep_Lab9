@@ -1,5 +1,7 @@
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button'; // You can specialise part of Library you want instead of getting whole library
+import axios from 'axios';
 
 // BookItem Function
 function BookItem(props) { // props (short for properties) are a mechanism for passing data from a parent component to a child component
@@ -38,6 +40,19 @@ function BookItem(props) { // props (short for properties) are a mechanism for p
 
                 {/* button link to the edit page for the current book */}
                 <Link to={"/edit/"+props.myBook._id} className='btn btn-primary'>Edit</Link> {/* The to prop is constructed using props.myBook._id to form the URL */}
+                <Button variant = "danger" onClick={
+                    (e)=>{ // e stands for event
+
+                        // Delete Added
+                        axios.delete('http://localhost:4000/api/book/'+props.myBook._id)
+                        // Refresh Page Added
+                        .then((res)=>{
+                            let reload = props.reload();
+                        })
+                        .catch();
+
+                    }
+                }>Delete</Button>
 
             </Card>
 
