@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
+// declaring and exporting a JavaScript function named Edit with properties as the default export of the current module
 export default function Edit(props) {
 
     // The useParams hook returns an object of key/value pairs of
@@ -44,8 +45,9 @@ export default function Edit(props) {
 
     const handleSubmit = (event) => {
 
-        event.preventDefault();
+        event.preventDefault(); // prevents the default behavior of the form when it is submitted. In a typical HTML form, submitting it would cause a page reload.
 
+        // creates a new JavaScript object named newBook
         const newBook = {
 
             id: id,
@@ -54,6 +56,7 @@ export default function Edit(props) {
             author: author
         };
 
+
         axios.put('http://localhost:4000/api/book/' + id, newBook)
 
             .then((res) => {
@@ -61,10 +64,12 @@ export default function Edit(props) {
                 console.log(res.data);
                 navigate('/read');
 
-            });
+            })
+            //.catch{(error)} good to have error catching if the edit doesnt work properly
 
     }
 
+    // Returns Component Contents
     return (
 
         <div>
